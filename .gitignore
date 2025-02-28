@@ -1,0 +1,8 @@
+# Python virtual environments
+voicedraw_venv/
+venv/
+env/
+.env/
+.venv/
+ENV/
+.env
