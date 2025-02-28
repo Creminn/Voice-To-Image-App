@@ -27,3 +27,6 @@ def record(record_active, frames):
     sound_file.setframerate(44100)
     sound_file.writeframes(b''.join(frames))
     sound_file.close()vvcb vczb
+
+
+    dfgl;'mksdf'pgklm,s'pdflogsdf
