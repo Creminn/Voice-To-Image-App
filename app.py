@@ -62,26 +62,27 @@ with col_image:
         if message["role"] == "assistant":
             with st.chat_message(name=message["role"], avatar="./icons/ai_icon.jpg"):
                 st.write("Here is the image I generated for you")
-                st.image(image=message["content"], width=400)
+                st.image(image=message["content"], width=300)
         elif message["role"] == "user":
             with st.chat_message(name=message["role"], avatar="./icons/user_avatar.png"):
                 st.success(message["content"])
         
     if stop_btn:
         with st.chat_message(name="user", avatar="./icons/user_avatar.png"):
-            voice_prompt = transcripter.transcribe_with_whisper(audio_file_name="voice_prompt.wav")
+            with st.spinner("Voice is transcripting..."):
+                voice_prompt = transcripter.transcribe_with_whisper(audio_file_name="voice_prompt.wav")
             st.success(voice_prompt)
     
         st.session_state.messages.append({"role": "user", "content": voice_prompt})
 
         with st.chat_message(name="assistant", avatar="./icons/ai_icon.jpg"):
             st.warning("Here is the image I generated for you")
-
-            if latest_image_edit:
-                image_file_name = painter.generate_image(image_path=st.session_state.latest_image, prompt=voice_prompt)
-            else:
-                image_file_name = painter.generate_image_with_dalle(prompt=voice_prompt)
-            st.image(image=image_file_name, width=400)
+            with st.spinner("Image is being generated..."):
+                if latest_image_edit:
+                    image_file_name = painter.generate_image(image_path=st.session_state.latest_image, prompt=voice_prompt)
+                else:
+                    image_file_name = painter.generate_image_with_dalle(prompt=voice_prompt)
+            st.image(image=image_file_name, width=300)
         
         st.session_state.messages.append({"role": "assistant", "content": image_file_name})
         st.session_state.latest_image = image_file_name

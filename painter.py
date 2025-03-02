@@ -21,7 +21,7 @@ def generate_image_with_dalle(prompt):
     AI_Response = client.images.generate(
         model="dall-e-3",
         size="1024x1024",
-        quality="hd",
+        quality="standard",
         n=1,
         response_format="url",
         prompt=prompt
@@ -79,6 +79,11 @@ def gemini_vision_with_local_file(image_path, prompt):
 
     Important: When implementing this change, maintain all other elements exactly as they appear in the original image (same positions, lighting, perspective, background details, etc.). Only modify what is explicitly requested in the modification instruction.
     """
+    print("Generated prompt:")
+    print(multimodality_prompt)
+
+    prompt_length = len(multimodality_prompt)
+    print(f"Prompt length: {prompt_length} characters")
 
     client = genai.GenerativeModel(model_name="gemini-2.0-flash")
 
