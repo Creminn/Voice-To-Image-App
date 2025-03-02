@@ -14,7 +14,7 @@ def transcribe_with_whisper(audio_file_name):
     audio_file = open(audio_file_name, "rb")
     AI_generated_transcript = client.audio.transcriptions.create(
         model="whisper-1",
-        file=audio_file_name,
+        file=audio_file,
         language="tr"
     )
 
