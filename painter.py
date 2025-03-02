@@ -20,7 +20,7 @@ def generate_image_with_dalle(prompt):
 
     AI_Response = client.images.generate(
         model="dall-e-3",
-        size="512x512",
+        size="1024x1024",
         quality="hd",
         n=1,
         response_format="url",
@@ -42,6 +42,12 @@ def generate_image_with_dalle(prompt):
         file.write(image_bytes.getbuffer())
 
     return file_name
+
+my_key_google = os.getenv("google_apikey")
+
+genai.configure(
+    api_key=my_key_google
+    )
 
 def gemini_vision_with_local_file(image_path, prompt):
 
