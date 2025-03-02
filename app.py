@@ -83,6 +83,12 @@ with col_image:
                 else:
                     image_file_name = painter.generate_image_with_dalle(prompt=voice_prompt)
             st.image(image=image_file_name, width=300)
-        
+            with open(image_file_name, "rb") as file:
+                st.download_button(
+                    label="Download",
+                    data=file,
+                    file_name=image_file_name,
+                    mime="image/png"
+                )
         st.session_state.messages.append({"role": "assistant", "content": image_file_name})
         st.session_state.latest_image = image_file_name
